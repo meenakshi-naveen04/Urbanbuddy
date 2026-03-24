@@ -1,0 +1,116 @@
+body {
+  margin: 0;
+  font-family: "Segoe UI";
+  background: #f4f6fb;
+}
+
+/* HEADER */
+.header {
+  text-align: center;
+  padding: 20px;
+}
+
+.header span {
+  color: #2d5bd1;
+}
+
+/* SEARCH */
+.search {
+  width: 90%;
+  margin: 10px auto;
+  display: block;
+  padding: 12px;
+  border-radius: 20px;
+  border: none;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* SERVICES */
+.services {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.service-card {
+  width: 30%;
+  background: white;
+  margin: 10px;
+  padding: 15px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.icon {
+  font-size: 24px;
+}
+
+/* OFFERS */
+.offer {
+  margin: 15px;
+  padding: 15px;
+  border-radius: 15px;
+  color: white;
+}
+
+.offer.blue {
+  background: #2d5bd1;
+}
+
+.offer.brown {
+  background: #e7840af4;
+}
+
+/* STEPS */
+.steps {
+  display: flex;
+  justify-content: space-around;
+}
+
+.step {
+  background: white;
+  padding: 10px;
+  border-radius: 10px;
+  width: 30%;
+  text-align: center;
+}
+
+/* BOTTOM NAV */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: white;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+  box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
+}
+
+.bottom-nav div {
+  text-align: center;
+  font-size: 14px;
+}
+.page {
+  padding: 20px;
+}
+
+.provider-card {
+  background: white;
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 15px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  cursor: pointer;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background: #2d5bd1;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  margin-top: 20px;
+}
