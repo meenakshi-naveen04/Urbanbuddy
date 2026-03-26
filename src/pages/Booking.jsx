@@ -1,20 +1,85 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Booking() {
   const navigate = useNavigate();
 
+  const [date, setDate] = useState("");
+  const [time, setTime] = useState("");
+  const [address, setAddress] = useState("");
+
+  // TODAY & TOMORROW
+  const today = new Date();
+  const tomorrow = new Date();
+  tomorrow.setDate(today.getDate() + 1);
+
+  const formatDate = (d) => d.toISOString().split("T")[0];
+
+  const todayStr = formatDate(today);
+  const tomorrowStr = formatDate(tomorrow);
+
+  // TIME SLOTS (7AM - 9PM)
+  const timeSlots = [
+    "07:00 AM", "08:00 AM", "09:00 AM",
+    "10:00 AM", "11:00 AM", "12:00 PM",
+    "01:00 PM", "02:00 PM", "03:00 PM",
+    "04:00 PM", "05:00 PM", "06:00 PM",
+    "07:00 PM", "08:00 PM", "09:00 PM"
+  ];
+
+  const handleBooking = () => {
+    if (!date || !time || !address) {
+      alert("Please fill all fields");
+      return;
+    }
+
+    alert(`Booking Confirmed on ${date} at ${time}`);
+    navigate("/payment");
+  };
+
   return (
-    <div className="form">
-      <h2>Book Service</h2>
+    <div className="booking-page">
 
-      <input placeholder="Name" />
-      <input placeholder="Phone" />
-      <input placeholder="Address" />
-      <input type="date" />
+      <h2>Book Your Service</h2>
 
-      <button onClick={() => navigate("/payment")}>
+      {/* DATE */}
+      <label>Select Date</label>
+      <select
+        value={date}
+        onChange={(e) => setDate(e.target.value)}
+        className="input"
+      >
+        <option value="">Choose Date</option>
+        <option value={todayStr}>Today</option>
+        <option value={tomorrowStr}>Tomorrow</option>
+      </select>
+
+      {/* TIME */}
+      <label>Select Time</label>
+      <select
+        value={time}
+        onChange={(e) => setTime(e.target.value)}
+        className="input"
+      >
+        <option value="">Choose Time</option>
+        {timeSlots.map((t, i) => (
+          <option key={i} value={t}>{t}</option>
+        ))}
+      </select>
+
+      {/* ADDRESS */}
+      <label>Enter Address</label>
+      <textarea
+        placeholder="Enter full address"
+        value={address}
+        onChange={(e) => setAddress(e.target.value)}
+      />
+
+      {/* BUTTON */}
+      <button onClick={handleBooking}>
         Confirm Booking
       </button>
+
     </div>
   );
 }
