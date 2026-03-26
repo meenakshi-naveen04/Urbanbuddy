@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { db, auth } from "../firabaseconfig"; // ✅ FIXED IMPORT
+import { collection, addDoc } from "firebase/firestore";
 
 function Booking() {
   const navigate = useNavigate();
@@ -18,7 +20,7 @@ function Booking() {
   const todayStr = formatDate(today);
   const tomorrowStr = formatDate(tomorrow);
 
-  // TIME SLOTS (7AM - 9PM)
+  // TIME SLOTS
   const timeSlots = [
     "07:00 AM", "08:00 AM", "09:00 AM",
     "10:00 AM", "11:00 AM", "12:00 PM",
@@ -27,14 +29,37 @@ function Booking() {
     "07:00 PM", "08:00 PM", "09:00 PM"
   ];
 
-  const handleBooking = () => {
+  const handleBooking = async () => {
     if (!date || !time || !address) {
       alert("Please fill all fields");
       return;
     }
 
-    alert(`Booking Confirmed on ${date} at ${time}`);
-    navigate("/payment");
+    const user = auth.currentUser;
+
+    if (!user) {
+      alert("Please login first ❌");
+      return;
+    }
+
+    try {
+      // 🔥 SAVE TO FIREBASE WITH USER
+      await addDoc(collection(db, "bookings"), {
+        date,
+        time,
+        address,
+        userId: user.uid,
+        userEmail: user.email,
+        createdAt: new Date()
+      });
+
+      alert(`Booking Confirmed on ${date} at ${time} ✅`);
+      navigate("/payment");
+
+    } catch (error) {
+      console.error(error);
+      alert("Error saving booking ❌");
+    }
   };
 
   return (
