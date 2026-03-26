@@ -1,23 +1,33 @@
 import { useNavigate } from "react-router-dom";
 
-function Success() {
+function PaymentSuccess() {
   const navigate = useNavigate();
 
   return (
-    <div className="overlay">
-      <div className="modal">
-        <h2>✅ Payment Successful!</h2>
-        <p>Your provider is on the way</p>
+    <div className="success-page">
 
-        <button
-          className="primary-btn blue"
-          onClick={() => navigate("/tracking")}
-        >
-          Track Live Location
-        </button>
+      {/* SUCCESS ICON */}
+      <div className="success-icon">✅</div>
+
+      {/* MESSAGE */}
+      <h2>Payment Successful!</h2>
+      <p>Your service has been booked successfully</p>
+
+      {/* ANIMATED IMAGE */}
+      <div className="animation">
+        🚀 Your buddy is on the way!
       </div>
+
+      {/* BUTTON */}
+      <button
+        className="track-btn"
+        onClick={() => navigate("/tracking")}
+      >
+        Track Your Buddy
+      </button>
+
     </div>
   );
 }
 
-export default Success;
+export default PaymentSuccess;
